@@ -8,4 +8,8 @@ const client = createClient({
   }),
 });
 
+export function convertWixImageToUrl(wixImageUrl: string) {
+  return `https://static.wixstatic.com/media/${wixImageUrl.split("/")[3]}`;
+}
+
 export default client;
