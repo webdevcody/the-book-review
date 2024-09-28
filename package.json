@@ -11,6 +11,7 @@
   "dependencies": {
     "@radix-ui/react-icons": "^1.3.0",
     "@radix-ui/react-slot": "^1.1.0",
+    "@radix-ui/react-toast": "^1.2.1",
     "@wix/data": "^1.0.153",
     "@wix/media": "^1.0.120",
     "@wix/sdk": "^1.12.14",
