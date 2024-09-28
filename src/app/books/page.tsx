@@ -11,18 +11,51 @@ import {
 import Link from "next/link";
 import Image from "next/image";
 import { BookIcon } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { redirect } from "next/navigation";
 
-export default async function Home() {
+export default async function Home({
+  searchParams,
+}: {
+  searchParams: { search?: string };
+}) {
   const books = await client.items
     .queryDataItems({
       dataCollectionId: "Books",
     })
+    .startsWith("title", searchParams.search ?? "")
     .find()
     .then((res) => res.items.map((item) => item.data));
 
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <h1 className="text-2xl font-bold">Books</h1>
+    <div className="container mx-auto py-12 space-y-8">
+      <div className="flex justify-between items-center">
+        <h1 className="text-2xl font-bold">Books</h1>
+        <form
+          action={async (formData) => {
+            "use server";
+            const search = formData.get("search");
+            redirect(`/books?search=${search}`);
+          }}
+          className="flex gap-2"
+        >
+          <Input name="search" type="text" placeholder="Search books" />
+          <Button type="submit">Search</Button>
+        </form>
+        <Button>Add Book</Button>
+      </div>
+
+      {books.length === 0 && (
+        <div className="border p-12 flex flex-col gap-4 items-center justify-center">
+          <Image
+            width={200}
+            height={200}
+            src={"/not-found.svg"}
+            alt={"book not found icon"}
+          />
+          <p>No books found</p>
+        </div>
+      )}
 
       <div className="grid grid-cols-3 gap-4">
         {books.map((book) => (
@@ -56,8 +89,6 @@ export default async function Home() {
           </Card>
         ))}
       </div>
-
-      <Button>Add Book</Button>
     </div>
   );
 }
