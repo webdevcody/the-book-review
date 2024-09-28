@@ -56,7 +56,7 @@ export default async function BookPage({
             <div>
               <p className="text-lg font-semibold">By {book?.author}</p>
               <p className="text-sm text-muted-foreground">
-                Published in {book?.publishYear}
+                Published in {book?.publicationDate}
               </p>
               <p className="mt-4">{book?.description}</p>
             </div>

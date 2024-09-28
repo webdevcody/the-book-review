@@ -13,6 +13,7 @@ import Image from "next/image";
 import { BookIcon } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { redirect } from "next/navigation";
+import { AddBookDialog } from "./add-book-dialog";
 
 export default async function Home({
   searchParams,
@@ -40,9 +41,12 @@ export default async function Home({
           className="flex gap-2"
         >
           <Input name="search" type="text" placeholder="Search books" />
-          <Button type="submit">Search</Button>
+          <Button variant="secondary" type="submit">
+            Search
+          </Button>
         </form>
-        <Button>Add Book</Button>
+
+        <AddBookDialog />
       </div>
 
       {books.length === 0 && (
@@ -82,7 +86,7 @@ export default async function Home({
               <p>{book?.author}</p>
             </CardContent>
             <CardFooter>
-              <Button asChild>
+              <Button asChild variant="secondary">
                 <Link href={`/books/${book?._id}`}>Read Reviews</Link>
               </Button>
             </CardFooter>
