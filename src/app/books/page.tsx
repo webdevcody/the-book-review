@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button";
-import client, { convertWixImageToUrl } from "@/lib/wix";
 import {
   Card,
   CardContent,
@@ -14,19 +13,23 @@ import { BookIcon } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { redirect } from "next/navigation";
 import { AddBookDialog } from "./add-book-dialog";
+import { getServerClient } from "@/lib/wix";
+import { convertWixImageToUrl } from "@/lib/wix-client";
 
 export default async function Home({
   searchParams,
 }: {
   searchParams: { search?: string };
 }) {
-  const books = await client.items
-    .queryDataItems({
+  const books = await getServerClient()
+    .items.queryDataItems({
       dataCollectionId: "Books",
     })
     .startsWith("title", searchParams.search ?? "")
     .find()
     .then((res) => res.items.map((item) => item.data));
+
+  console.log(books);
 
   return (
     <div className="container mx-auto py-12 space-y-8">

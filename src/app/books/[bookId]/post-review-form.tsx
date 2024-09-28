@@ -4,9 +4,9 @@ import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
-import client from "@/lib/wix";
 import { useToast } from "@/hooks/use-toast";
 import { Loader2 } from "lucide-react";
+import { getClient } from "@/lib/wix-client";
 
 const initialReview = {
   name: "",
@@ -25,8 +25,8 @@ export function PostReviewForm({ bookId }: { bookId: string }) {
         e.preventDefault();
         setIsLoading(true);
 
-        client.items
-          .insertDataItem({
+        getClient()
+          .items.insertDataItem({
             dataCollectionId: "Reviews",
             dataItem: {
               data: {

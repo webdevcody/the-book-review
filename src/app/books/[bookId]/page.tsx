@@ -1,22 +1,26 @@
-import client, { convertWixImageToUrl } from "@/lib/wix";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Image from "next/image";
 import { BookIcon, ChevronLeft, StarIcon } from "lucide-react";
 import { PostReviewForm } from "./post-review-form";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { getServerClient } from "@/lib/wix";
+import { convertWixImageToUrl } from "@/lib/wix-client";
 
 export default async function BookPage({
   params,
 }: {
   params: { bookId: string };
 }) {
-  const { data: book } = await client.items.getDataItem(params.bookId, {
-    dataCollectionId: "Books",
-  });
+  const { data: book } = await getServerClient().items.getDataItem(
+    params.bookId,
+    {
+      dataCollectionId: "Books",
+    }
+  );
 
-  const reviews = await client.items
-    .queryDataItems({
+  const reviews = await getServerClient()
+    .items.queryDataItems({
       dataCollectionId: "Reviews",
     })
     .eq("bookId", params.bookId)

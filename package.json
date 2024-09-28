@@ -16,9 +16,11 @@
     "@radix-ui/react-toast": "^1.2.1",
     "@wix/data": "^1.0.153",
     "@wix/media": "^1.0.120",
+    "@wix/members": "^1.0.103",
     "@wix/sdk": "^1.12.14",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
+    "js-cookie": "^3.0.5",
     "lucide-react": "^0.446.0",
     "next": "14.2.13",
     "react": "^18",
@@ -27,6 +29,7 @@
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
+    "@types/js-cookie": "^3.0.6",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

@@ -12,7 +12,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import client from "@/lib/wix";
+import { getClient } from "@/lib/wix-client";
+
 import { useRouter } from "next/navigation";
 
 export function AddBookDialog() {
@@ -41,7 +42,7 @@ export function AddBookDialog() {
             const isbn = formData.get("isbn");
             const description = formData.get("description");
 
-            const response = await client.items.insertDataItem({
+            const response = await getClient().items.insertDataItem({
               dataCollectionId: "Books",
               dataItem: {
                 data: {
